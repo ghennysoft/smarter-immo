@@ -1,0 +1,23 @@
+.Detail header {
+    background-image: linear-gradient(to left, rgba(0, 0, 255, 0.3), rgba(238, 130, 238, 0.3));
+}
+
+.Detail .nav a {
+    color: inherit;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.Detail .btns a {
+    text-decoration: none;
+    color: white !important;
+}
+
+.Detail .property .map {
+    width: 100%;
+    height: 500px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #aaa;
+}
