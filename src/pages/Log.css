@@ -1,0 +1,39 @@
+/* Signin Page */
+.sign .box {
+    margin-top: 60px;
+    margin-bottom: 50px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px 1px #ddd;
+    overflow: hidden;
+    min-height: 400px;
+}
+
+.sign .box form label {
+    display: block;
+}
+
+.sign .box form input {
+    margin-bottom: 15px;
+}
+
+.sign .box form button {
+    outline: none;
+    border: none;
+    border: 1px solid red;
+    background-color: red;
+    color: #fff;
+    border-radius: 20px;
+    padding: 5px 20px;
+    transition: all 200ms;
+}
+
+.sign .box form button:hover {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border: 1px solid red;
+    color: red;
+    border-radius: 20px;
+    padding: 5px 20px;
+    transition: all 200ms;
+}

@@ -1,9 +1,8 @@
 import React from 'react'
 import './Home.css'
 import { Link } from 'react-router-dom'
-import {Bath, Bed, DollarSign, HousePlus, MapPin} from 'lucide-react'
+import {Bath, Bed, Building2, DollarSign, Hotel, HousePlus, MapPin, UserRoundSearchIcon} from 'lucide-react'
 import HeaderComponent from '../components/Header/Header'
-import { MenuIcon, User, User2Icon } from 'lucide-react'
 import Footer from '../components/Footer/Footer'
 
 const Home = () => {
@@ -17,7 +16,7 @@ const Home = () => {
               <h4 className='title'>TROUVEZ VOTRE MAISON DE REVE AVEC SMARTER IMMO</h4>
               <h5>Tous les goûts - Tous les prix - Tout style - Tout lieu</h5>
               <div className="search-bar">
-                <div className="row m-0 filter py-5">
+                <div className="row m-0 filter py-5" style={{gap: '0.3rem'}}>
                   <div className="col-lg-3 px-0 mb-2">
                     <div className="input-group">
                       <div className="input-group-text bg-muted">
@@ -87,6 +86,42 @@ const Home = () => {
             <Link to={'/about'} className="btn" style={{backgroundColor: 'rgb(247, 135, 6)', color: '#fff'}}>En savoir plus</Link>
           </div>
         </div>
+        </div>
+      </div>
+
+      <div className="services mt-5 py-5">
+        <div className="container">
+          <h2 style={{marginLeft: '20px', marginBottom: '50px'}}>Nos services</h2>
+          <div className="row">
+            <div className="col-md-6 col-lg-3 mb-3">
+              <div className="d-flex flex-column align-items-center">
+                <Hotel width={70} height={70} />
+                <h6 className='my-2'>Appartements à louer</h6>
+                <p className='text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro sint impedit, distinctio vel ex laboriosam, saepe commodi.</p>
+              </div>
+            </div>
+            <div className="col-md-6 col-lg-3 mb-3">
+              <div className="d-flex flex-column align-items-center">
+                <Building2 width={70} height={70} />
+                <h6 className='my-2'>Maison à vendre</h6>
+                <p className='text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro sint impedit, distinctio vel ex laboriosam, saepe commodi.</p>
+              </div>
+            </div>
+            <div className="col-md-6 col-lg-3 mb-3">
+              <div className="d-flex flex-column align-items-center">
+                <HousePlus width={70} height={70} />
+                <h6 className='my-2'>Maison à louer</h6>
+                <p className='text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro sint impedit, distinctio vel ex laboriosam, saepe commodi.</p>
+              </div>
+            </div>
+            <div className="col-md-6 col-lg-3 mb-3">
+              <div className="d-flex flex-column align-items-center">
+                <UserRoundSearchIcon width={70} height={70} />
+                <h6 className='my-2'>Agent immobilier</h6>
+                <p className='text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro sint impedit, distinctio vel ex laboriosam, saepe commodi.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -160,7 +195,7 @@ const Home = () => {
             </div>
           </div> */}
 
-          <div className="cta">
+          {/* <div className="cta">
             <div className="container">
               <div className="row m-0 box">
                 <div className="col-md-6">
@@ -169,12 +204,11 @@ const Home = () => {
                 <div className="col-md-6">
                   <h2 style={{fontSize: '3rem'}} className='text-white'>Service client opérationel 24h/7</h2>
                   <h5 className="my-4 text-white">Notre équipe d'assistance est disponible, entrez en contact avec nous à tout moment</h5>
-                  {/* <button className="btn btn-warning p-3">Nous appeler</button> &nbsp; */}
                   <button className="btn themeBgColor1 p-3">Nous Contacter</button>
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* <div className="partenaires">
             <div className="container">
@@ -194,7 +228,7 @@ const Home = () => {
       </div>
 
     <Footer />
-    
+
     </div>
   )
 }

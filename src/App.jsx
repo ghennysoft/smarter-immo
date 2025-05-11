@@ -6,6 +6,7 @@ import Detail from './pages/Detail';
 import Properties from './pages/Properties';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import About from './pages/About';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path='/register' element={<Register />}></Route>
         <Route path='/properties' element={<Properties />}></Route>
         <Route path='/detail' element={<Detail />}></Route>
+        <Route path='/about' element={<About />}></Route>
       </Routes>
     </>
   )
