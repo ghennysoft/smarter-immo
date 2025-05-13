@@ -38,8 +38,8 @@ const Home = () => {
                       <div className="input-group-text bg-muted">
                       <HousePlus />
                       </div>
-                      <select name="for" id="for" className='form-control'>
-                        <option disabled selected value="">Type</option>
+                      <select name="for" defaultValue={""} id="for" className='form-control'>
+                        <option disabled value="">Type</option>
                         <option value="rent">A louer</option>
                         <option value="sell">A vendre</option>
                       </select>

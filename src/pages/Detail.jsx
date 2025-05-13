@@ -94,8 +94,20 @@ const Detail = () => {
                   </div>
                 </div>
 
-                <h5 className='themeColor1'>Maps</h5>
-                <div className="map"></div>
+                <div className="themeBgColor1 p-3">
+                  <div className="row">
+                    <div className="col-3 p-1">
+                      <img src="/smarter_about.png" alt="" className='img-fluid' style={{borderRadius: "50%", border: "3px solid #ccc"}} />
+                    </div>
+                    <div className="col-9 mt-3">
+                      <h6 style={{margin: '0px', fontSize: '0.5rem'}}>PROPRIETAIRE</h6>
+                      <h4>John Doe</h4>
+                    </div>
+                  </div>
+                </div>
+
+                {/* <h5 className='themeColor1'>Maps</h5>
+                <div className="map"></div> */}
               </div>
             </div>
         </div>

@@ -38,20 +38,16 @@ const Register = () => {
                 dispatch(loginSuccess(resp.data))
                 navigate('/')
                 setLoading(false)
-                console.log(resp.data)
             })
             .catch((e)=>{
                 dispatch(loginFailure())
                 setLoading(false)
-                console.log(e.response)
             }) 
 
             setLoading(false)
-            console.log(res.data)
         })
         .catch((err)=>{
             setLoading(false)
-            console.log(err)
         })
     }
     

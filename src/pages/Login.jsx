@@ -12,9 +12,7 @@ const Login = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [loading, setLoading] = useState(false)
-    console.log('email: ', email);
-    console.log('password: ', password);    
+    const [loading, setLoading] = useState(false) 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,12 +28,10 @@ const Login = () => {
             dispatch(loginSuccess(res.data))
             navigate('/')
             setLoading(false)
-            console.log(res.data)
         })
         .catch((err)=>{
             dispatch(loginFailure())
             setLoading(false)
-            console.log(err.response)
         })        
     }
 
