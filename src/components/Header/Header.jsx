@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 const HeaderComponent = ({children}) => {
   
-  const {currentUser} = useSelector(state=>state.user)
+  const {currentUser} = useSelector(state=>state.user);
   
   const [openMenu, setOpenMenu] = useState(false);
   const [openLog, setOpenLog] = useState(false);
@@ -22,6 +22,10 @@ const HeaderComponent = ({children}) => {
                 <li className="nav-item"><Link to={"/properties"} className="nav-link">Propriétés</Link></li>
                 <li className="nav-item"><Link to={"/about"} className="nav-link">A propos</Link></li>
                 <li className="nav-item"><Link to={"/"} className="nav-link">Contact</Link></li>
+                {
+                  currentUser?.user?.is_superuser &&
+                  <li className="nav-item"><Link to={"/add"} className="nav-link">Ajouter</Link></li>
+                }
               </ul>
             </div>
             <div className="d-flex position-relative pt-2">
@@ -36,6 +40,10 @@ const HeaderComponent = ({children}) => {
                 <li className="nav-item"><Link to={"/properties"} className="nav-link">Propriétés</Link></li>
                 <li className="nav-item"><Link to={"/about"} className="nav-link">A propos</Link></li>
                 <li className="nav-item"><Link to={"/"} className="nav-link">Contact</Link></li>
+                {
+                  currentUser?.user?.is_superuser &&
+                  <li className="nav-item"><Link to={"/add"} className="nav-link">Ajouter</Link></li>
+                }
               </ul>
               {
                 !currentUser
