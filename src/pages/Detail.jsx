@@ -15,20 +15,48 @@ const Detail = () => {
               <div className="col-lg-9 item mb-3">
                 <img src="/images/r1.png" alt="img" className='w-100 mb-3' />
                 <h2 className="mt-2" style={{fontWeight: 'bolder'}}>Résidence Immo</h2>
-                <div className="d-flex align-items-center">
-                  <MapPinIcon width={18} />  &nbsp;
+                <div className="d-flex align-items-center mb-12">
+                  <MapPinIcon width={18} className='text-primary' />  &nbsp;
                   <span>Kinshasa, RDC</span>
                 </div>
-                <h5 className='mt-3'><b>Description</b></h5>
+                <h1 className='text-primary' style={{fontWeight: 'bold'}}>$500.00</h1>
+                <h5 className='mt-4'><b>Description</b></h5>
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, commodi quae voluptates rerum expedita ipsa numquam reiciendis eum iste ullam voluptas, perferendis blanditiis distinctio, laboriosam quo ut sit molestiae consequuntur.</p>
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, commodi quae voluptates rerum expedita ipsa numquam reiciendis eum iste ullam voluptas, perferendis blanditiis distinctio, laboriosam quo ut sit molestiae consequuntur.</p>
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus, commodi quae voluptates rerum expedita ipsa numquam reiciendis eum iste ullam voluptas, perferendis blanditiis distinctio, laboriosam quo ut sit molestiae consequuntur.</p>
+                
+                <h5 className='mt-4'><b>Equipements</b></h5>
+                <ul className='row'>
+                  <div className="col-sm-6 col-md-4 p-3">
+                    <li>Piscine privée</li>
+                  </div>
+                  <div className="col-sm-6 col-md-4 p-3">
+                    <li>Garage 2 voitures</li>
+                  </div>
+                  <div className="col-sm-6 col-md-4 p-3">
+                    <li>Terrasse 50m²</li>
+                  </div>
+                  <div className="col-sm-6 col-md-4 p-3">
+                    <li>Vue mer</li>
+                  </div>
+                  <div className="col-sm-6 col-md-4 p-3">
+                    <li>Cuisine équipée</li>
+                  </div>
+                  <div className="col-sm-6 col-md-4 p-3">
+                    <li>Climatisation</li>
+                  </div>
+                  <div className="col-sm-6 col-md-4 p-3">
+                    <li>Sécurité 24h/24</li>
+                  </div>
+                  <div className="col-sm-6 col-md-4 p-3">
+                    <li>Jardin paysager</li>
+                  </div>
+                </ul>
               </div>
               <div className="col-lg-3 item mb-3">
                 <div className="py-3">
-                  <h1>$500.00</h1>
                   <div className="row mt-3">
-                    <div className="col-md-6 mb-3">
+                    <div className="col-sm-6 mb-3">
                       <div className="d-flex gap-2">
                         <div className='border-primary' style={{border: '2px solid #777', padding: '10px'}}>
                           <Bed width={20} height={20} className='text-primary' /> <br />
@@ -39,7 +67,7 @@ const Detail = () => {
                         </b>
                       </div>
                     </div>
-                    <div className="col-md-6 mb-3">
+                    <div className="col-sm-6 mb-3">
                       <div className="d-flex gap-2">
                         <div className='border-primary' style={{border: '2px solid #777', padding: '10px'}}>
                           <Bath width={20} height={20} className='text-primary' /> <br />
@@ -50,7 +78,7 @@ const Detail = () => {
                         </b>
                       </div>
                     </div>
-                    <div className="col-md-6 mb-3">
+                    <div className="col-sm-6 mb-3">
                       <div className="d-flex gap-2">
                         <div className='border-primary' style={{border: '2px solid #777', padding: '10px'}}>
                           <Bath width={20} height={20} className='text-primary' /> <br />
@@ -61,7 +89,7 @@ const Detail = () => {
                         </b>
                       </div>
                     </div>
-                    <div className="col-md-6 mb-3">
+                    <div className="col-sm-6 mb-3">
                       <div className="d-flex gap-2">
                         <div className='border-primary' style={{border: '2px solid #777', padding: '10px'}}>
                           <Bath width={20} height={20} className='text-primary' /> <br />
@@ -72,7 +100,7 @@ const Detail = () => {
                         </b>
                       </div>
                     </div>
-                    <div className="col-md-6 mb-3">
+                    <div className="col-sm-6 mb-3">
                       <div className="d-flex gap-2">
                         <div className='border-primary' style={{border: '2px solid #777', padding: '10px'}}>
                           <Bath width={20} height={20} className='text-primary' /> <br />
@@ -83,7 +111,7 @@ const Detail = () => {
                         </b>
                       </div>
                     </div>
-                    <div className="col-md-6 mb-3">
+                    <div className="col-sm-6 mb-3">
                       <div className="d-flex gap-2">
                         <div className='border-primary' style={{border: '2px solid #777', padding: '10px'}}>
                           <Bath width={20} height={20} className='text-primary' /> <br />

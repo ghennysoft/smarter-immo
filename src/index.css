@@ -4,3 +4,12 @@ html, body {
     font-family: "Inter", sans-serif !important;
     overflow-x: hidden;
 }
+
+.themeColor1 {
+    color: rgb(247, 135, 6) !important;
+}
+
+.themeBgColor1 {
+    background-color: rgb(247, 135, 6) !important;
+    color: #fff !important;
+}
