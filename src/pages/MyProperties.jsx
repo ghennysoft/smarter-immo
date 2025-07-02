@@ -3,8 +3,37 @@ import { Link } from 'react-router-dom'
 import {Bath, Bed} from 'lucide-react'
 import HeaderComponent from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
+import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const MyProperties = () => {
+
+  const {currentUser} = useSelector(state=>state.user);
+
+  const [properties, setProperties] = useState([]);
+
+  useEffect(()=>{
+      const getProperties = async () => {
+        await axios({
+          method: "get",
+          url: "http://127.0.0.1:8000/api/myProperties/",
+          withCredentials: true,
+          headers: {
+            "Authorization": `Token ${currentUser.token}`,
+          },
+        })
+        .then((res)=>{
+          setProperties(res.data)
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+      }
+      getProperties();
+    }, []);
+    console.log(properties);
+
   return (
     <div className='Home'>
       <HeaderComponent>
@@ -12,86 +41,29 @@ const MyProperties = () => {
 
       <div className="properties mt-lg-5">
         <div className="container">
-          <h2 className='p-4'>Mes Propriétés</h2>
+          <h2 className='p-4'>Propriétés</h2>
           <div className="list-items">
             <div className="row m-0">
-              <div className="col-md-6 col-lg-4 item mb-4">
-                <Link to={'/detail'}>
-                  <img src="/images/r1.png" alt="img" />
-                  <div className="d-flex justify-content-between pt-2">
-                    <h3 className="themeColor1">$500</h3>
-                    <p className="m-0" style={{ paddingTop: '2px' }}><small className='for'>A louer</small> &nbsp;</p>
-                  </div>
-                  <h6>Résidence IMMO KIN</h6>
-                  <b className='text-dark'>2 <Bed width={15} /> &nbsp; 1 <Bath width={15} /></b>
-                  <hr className="my-0" />
-                </Link>
-              </div>
-              
-              <div className="col-md-6 col-lg-4 item mb-4">
-                <Link to={'/detail'}>
-                  <img src="/images/r1.png" alt="img" />
-                  <div className="d-flex justify-content-between pt-2">
-                    <h3 className="themeColor1">$500</h3>
-                    <p className="m-0" style={{ paddingTop: '2px' }}><small className='for'>A louer</small> &nbsp;</p>
-                  </div>
-                  <h6>Résidence IMMO KIN</h6>
-                  <b className='text-dark'>2 <Bed width={15} /> &nbsp; 1 <Bath width={15} /></b>
-                  <hr className="my-0" />
-                </Link>
-              </div>
 
-              <div className="col-md-6 col-lg-4 item mb-4">
-                <Link to={'/detail'}>
-                  <img src="/images/r1.png" alt="img" />
-                  <div className="d-flex justify-content-between pt-2">
-                    <h3 className="themeColor1">$500</h3>
-                    <p className="m-0" style={{ paddingTop: '2px' }}><small className='for'>A louer</small> &nbsp;</p>
-                  </div>
-                  <h6>Résidence IMMO KIN</h6>
-                  <b className='text-dark'>2 <Bed width={15} /> &nbsp; 1 <Bath width={15} /></b>
-                  <hr className="my-0" />
-                </Link>
-              </div>
+              {
+                properties?.length !== 0
+                  ? properties?.map((property)=>(
+                    <div key={property?.id} className="col-md-6 col-lg-4 item mb-4">
+                      <Link to={`/detail/${property?.id}`}>
+                        <img src={property?.image ? 'http://127.0.0.1:8000'+property?.image : "/images/r1.png"} alt="img" height={200} />
+                        <div className="d-flex justify-content-between pt-2">
+                          <h3 className="themeColor1">${property?.price}</h3>
+                          <p className="m-0" style={{ paddingTop: '2px' }}><small className='for'>{property?.annonce_type}</small> &nbsp;</p>
+                        </div>
+                        <h6>{property?.title}</h6>
+                        <b className='text-dark'>{property?.bedrooms} <Bed width={15} /> &nbsp; {property?.bathrooms} <Bath width={15} /></b>
+                        <hr className="my-0" />
+                      </Link>
+                    </div>
+                  ))
+                  : <h4 className='text-muted mb-5'>Vous n'avez publier aucune proriété</h4>
+              }
 
-              <div className="col-md-6 col-lg-4 item mb-4">
-                <Link to={'/detail'}>
-                  <img src="/images/r1.png" alt="img" />
-                  <div className="d-flex justify-content-between pt-2">
-                    <h3 className="themeColor1">$500</h3>
-                    <p className="m-0" style={{ paddingTop: '2px' }}><small className='for'>A louer</small> &nbsp;</p>
-                  </div>
-                  <h6>Résidence IMMO KIN</h6>
-                  <b className='text-dark'>2 <Bed width={15} /> &nbsp; 1 <Bath width={15} /></b>
-                  <hr className="my-0" />
-                </Link>
-              </div>
-
-              <div className="col-md-6 col-lg-4 item mb-4">
-                <Link to={'/detail'}>
-                  <img src="/images/r1.png" alt="img" />
-                  <div className="d-flex justify-content-between pt-2">
-                    <h3 className="themeColor1">$500</h3>
-                    <p className="m-0" style={{ paddingTop: '2px' }}><small className='for'>A louer</small> &nbsp;</p>
-                  </div>
-                  <h6>Résidence IMMO KIN</h6>
-                  <b className='text-dark'>2 <Bed width={15} /> &nbsp; 1 <Bath width={15} /></b>
-                  <hr className="my-0" />
-                </Link>
-              </div>
-
-              <div className="col-md-6 col-lg-4 item mb-4">
-                <Link to={'/detail'}>
-                  <img src="/images/r1.png" alt="img" />
-                  <div className="d-flex justify-content-between pt-2">
-                    <h3 className="themeColor1">$500</h3>
-                    <p className="m-0" style={{ paddingTop: '2px' }}><small className='for'>A louer</small> &nbsp;</p>
-                  </div>
-                  <h6>Résidence IMMO KIN</h6>
-                  <b className='text-dark'>2 <Bed width={15} /> &nbsp; 1 <Bath width={15} /></b>
-                  <hr className="my-0" />
-                </Link>
-              </div>
             </div>
           </div>
         </div>

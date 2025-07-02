@@ -15,24 +15,24 @@ const Login = () => {
     const [loading, setLoading] = useState(false) 
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        dispatch(loginStart())
-        setLoading(true)
-        axios({
-            method: "post",
-            url: "http://127.0.0.1:8000/api/accounts/login/",
-            withCredentials: false,
-            data: {email, password}
-        })
-        .then((res)=>{
-            dispatch(loginSuccess(res.data))
-            navigate('/')
-            setLoading(false)
-        })
-        .catch((err)=>{
-            dispatch(loginFailure())
-            setLoading(false)
-        })        
+      e.preventDefault();
+      dispatch(loginStart())
+      setLoading(true)
+      axios({
+          method: "post",
+          url: "http://127.0.0.1:8000/api/accounts/login/",
+          withCredentials: false,
+          data: {email, password}
+      })
+      .then((res)=>{
+          dispatch(loginSuccess(res.data))
+          navigate('/')
+          setLoading(false)
+      })
+      .catch((err)=>{
+          dispatch(loginFailure())
+          setLoading(false)
+      })        
     }
 
   return (

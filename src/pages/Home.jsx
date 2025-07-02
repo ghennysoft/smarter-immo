@@ -4,8 +4,36 @@ import { Link } from 'react-router-dom'
 import {Bath, Bed, Building2, DollarSign, Hotel, HousePlus, MapPin, UserRoundSearchIcon} from 'lucide-react'
 import HeaderComponent from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 const Home = () => {
+
+  const {currentUser} = useSelector(state=>state.user);
+
+  const [properties, setProperties] = useState([]);
+
+  useEffect(()=>{
+    const getProperties = async () => {
+      await axios({
+        method: "get",
+        url: "http://127.0.0.1:8000/api/properties/",
+        withCredentials: true,
+        headers: {
+          "Authorization": `Token ${currentUser.token}`,
+        },
+      })
+      .then((res)=>{
+        setProperties(res.data)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+    getProperties();
+  }, []);
+
   return (
     <div className='Home'>
       
@@ -131,40 +159,24 @@ const Home = () => {
           <div className="list-items mt-4">
             <div className="row m-0">
 
-              <div className="col-md-6 col-lg-4 item mb-4">
-                <Link to={'/detail'}>
-                  <img src="/images/r1.png" alt="img" />
-                  <div className="d-flex justify-content-between pt-2">
-                    <h3 className="themeColor1">$500</h3>
-                    <p className="m-0" style={{ paddingTop: '2px' }}><small className='for'>A louer</small> &nbsp;</p>
-                  </div>
-                  <h6>Résidence IMMO KIN</h6>
-                  <b className='text-dark'>2 <Bed width={15} /> &nbsp; 1 <Bath width={15} /></b>
-                  <hr className="my-0" />
-                </Link>
-              </div>
-
-              <div className="col-md-6 col-lg-4 item mb-4">
-                <img src="/images/r2.png" alt="img" />
-                <div className="d-flex justify-content-between pt-2">
-                  <h3 className="themeColor1">$500</h3>
-                  <p className="m-0" style={{ paddingTop: '2px' }}><small className='for'>A louer</small> &nbsp;</p>
-                </div>
-                <h6>Résidence IMMO KIN</h6>
-                <b className='text-dark'>2 <Bed width={15} /> &nbsp; 1 <Bath width={15} /></b>
-                <hr className="my-0" />
-              </div>
-
-              <div className="col-md-6 col-lg-4 item mb-4">
-                <img src="/images/r3.png" alt="img" />
-                <div className="d-flex justify-content-between pt-2">
-                  <h3 className="themeColor1">$500</h3>
-                  <p className="m-0" style={{ paddingTop: '2px' }}><small className='for'>A louer</small> &nbsp;</p>
-                </div>
-                <h6>Résidence IMMO KIN</h6>
-                <b className='text-dark'>2 <Bed width={15} /> &nbsp; 1 <Bath width={15} /></b>
-                <hr className="my-0" />
-              </div>
+              {
+                properties?.length !== 0
+                  ? properties?.slice(0,3)?.map((property)=>(
+                    <div className="col-md-6 col-lg-4 item mb-4">
+                      <Link to={`/detail/${property?.id}`}>
+                        <img src={property?.image ? 'http://127.0.0.1:8000'+property?.image : "/images/r1.png"} alt="img" />
+                        <div className="d-flex justify-content-between pt-2">
+                          <h3 className="themeColor1">${property?.price}</h3>
+                          <p className="m-0" style={{ paddingTop: '2px' }}><small className='for'>{property?.annonce_type}</small> &nbsp;</p>
+                        </div>
+                        <h6>Résidence IMMO KIN</h6>
+                        <b className='text-dark'>{property?.bedrooms} <Bed width={15} /> &nbsp; {property?.bathrooms} <Bath width={15} /></b>
+                        <hr className="my-0" />
+                      </Link>
+                    </div>
+                  ))
+                  : <h4 className='text-muted mb-5'>Aucune proriété publié pour l'instant</h4>
+              }
               
             </div>
 

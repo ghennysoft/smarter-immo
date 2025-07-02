@@ -12,6 +12,8 @@ const AddProperty = () => {
   
   const navigate = useNavigate();
 
+  const [error, setError] = useState('');
+
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
@@ -21,12 +23,13 @@ const AddProperty = () => {
     annonce_type: '',
     price: '',
     area: '',
-    bedrooms: '',
-    bathrooms: '',
+    bedrooms: 0,
+    bathrooms: 0,
     address: '',
     city: '',
   });
-
+  console.log(formData);
+  
   const handleSubmit = async () => {
     setLoading(true)
     axios({
@@ -43,7 +46,10 @@ const AddProperty = () => {
       setLoading(false);
     })
     .catch((err)=>{
+      console.log(err);
+      
       setLoading(false);
+      setError("Erreur de publication, vérifiez que tous les champs sont bien remplis")
     })
   }
 
@@ -57,7 +63,10 @@ const AddProperty = () => {
             <div className="row m-0">
               <div className="col-12 text-center mb-5">
                 <h1 style={{fontWeight: 'bolder'}}>Ajouter une propriété</h1>
-                <p className='text-muted'>Remplissez le formulaire ci-dessous pour publier votre propriété</p>
+                <p className='text-muted pb-2'>Remplissez le formulaire ci-dessous pour publier votre propriété</p>
+                {
+                  error && <span className="alert alert-danger p-2">{error}</span>
+                }
               </div>
 
               <div className="col-12 mb-5">
@@ -162,7 +171,7 @@ const AddProperty = () => {
                   <div className="col-md-4 p-0">
                     <label className='pb-4 d-block px-1' htmlFor="images">
                       Choisir une image
-                      <input type="file" id='images' name='images' onChange={(e) => {setFormData({...formData, image: e.target.files})}} className='form-control p-3 mt-2' />
+                      <input type="file" id='images' name='images' onChange={(e) => {setFormData({...formData, image: e.target.files[0]})}} className='form-control p-3 mt-2' required />
                     </label>
                   </div>
                 </div>

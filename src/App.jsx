@@ -34,7 +34,7 @@ function App() {
             <Route path='/' element={<Home />}></Route>
             <Route path='/profile' element={<Profile />}></Route>
             <Route path='/properties' element={<Properties />}></Route>
-            <Route path='/detail' element={<Detail />}></Route>
+            <Route path='/detail/:id' element={<Detail />}></Route>
             <Route path='/about' element={<About />}></Route>
             <Route path='/addProperty' element={<AddProperty />}></Route>
             <Route path='/myProperty' element={<MyProperties />}></Route>
