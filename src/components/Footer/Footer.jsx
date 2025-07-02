@@ -5,7 +5,7 @@ const Footer = () => {
     <footer>
       <div className="container">
         <div className="row m-0 py-5">
-          <div className="col-lg-6">
+          <div className="col-lg-6 mb-4">
             <div className="d-flex align-items-end mb-3" style={{marginTop: '-30px'}}>
               <img src="/logo-smarter-immo.png" width={80} alt="" />
               <h4 className='themeColor1' style={{fontWeight: 'bold'}}>Smarter Immo</h4>
@@ -15,18 +15,18 @@ const Footer = () => {
               Nous vous accompagnons dans l'achat, <br /> la vente et la location de votre bien.
             </p>
           </div>
-          <div className="col-md-6 col-lg-3 links">
+          <div className="col-md-6 col-lg-3 mb-4 links">
             <b>Lien rapides</b>
             <Link to={'/'}>Accueil</Link>
             <Link to={'/properties'}>Propriétés</Link>
             <Link to={'/about'}>A propos</Link>
             <Link to={'/contact'}>Contact</Link>
           </div>
-          <div className="col-md-6 col-lg-3">
+          <div className="col-md-6 col-lg-3 mb-4">
             <b>Contact</b>
             <p className="my-2">+243 999 999 999</p>
-            <p className="my-2">contact@immoelite.fr</p>
-            <p className="my-2">123 Avenue des Champs-Élysées 75008 Paris, France</p>
+            <p className="my-2">contact@smarterimmo.com</p>
+            <p className="my-2">123 Avenue des Champs Gombe, Kinshasa</p>
           </div>
         </div>
         <hr />

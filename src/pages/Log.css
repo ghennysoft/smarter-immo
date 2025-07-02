@@ -12,7 +12,7 @@
     display: block;
 }
 
-.sign .box form input {
+.sign .box form input, .sign .box form select {
     margin-bottom: 15px;
 }
 

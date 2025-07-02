@@ -1,8 +1,51 @@
 import './Detail.css'
 import HeaderComponent from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
+import { useState } from 'react'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const AddProperty = () => {
+
+  const {currentUser} = useSelector(state=>state.user);
+  
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    image: null,
+    property_type: '',
+    annonce_type: '',
+    price: '',
+    area: '',
+    bedrooms: '',
+    bathrooms: '',
+    address: '',
+    city: '',
+  });
+
+  const handleSubmit = async () => {
+    setLoading(true)
+    axios({
+        method: "post",
+        url: "http://127.0.0.1:8000/api/properties/",
+        withCredentials: true,
+        headers: {
+          "Authorization": `Token ${currentUser.token}`,
+        },
+        data: formData,
+    })
+    .then((res)=>{
+      navigate('/');
+      setLoading(false);
+    })
+    .catch((err)=>{
+      setLoading(false);
+    })
+  }
 
   return (
     <div className='About'>
@@ -23,40 +66,43 @@ const AddProperty = () => {
                   <div className="col-md-6 p-0">
                     <label className='pb-4 d-block px-1' htmlFor="title">
                       Titre de l'annonce * 
-                      <input type="text" id='title' name='title' className='form-control p-3 mt-2' required placeholder='Ex: Villa moderne avec piscine' />
+                      <input type="text" id='title' name='title' onChange={(e) => {setFormData({...formData, title: e.target.value})}} className='form-control p-3 mt-2' required placeholder='Ex: Villa moderne avec piscine' />
                     </label>
                   </div>
                   <div className="col-md-6 p-0">
                     <label className='pb-4 d-block px-1' htmlFor="price">
                       Prix *
-                      <input type="number" id='price' name='price' className='form-control p-3 mt-2' required placeholder='Ex: 300000' />
+                      <input type="number" id='price' name='price' onChange={(e) => {setFormData({...formData, price: e.target.value})}} className='form-control p-3 mt-2' required placeholder='Ex: 300000' />
                     </label>
                   </div>
                   <div className="col-md-6 p-0">
-                    <label className='pb-4 d-block px-1' htmlFor="type_property">
+                    <label className='pb-4 d-block px-1' htmlFor="property_type">
                       Type de propriété *
-                      <select name="type_property" id="type_property" className='form-control p-3 mt-2' defaultValue={'house'}>
-                        <option value="house">Maison</option>
+                      <select name="property_type" id="property_type" defaultValue={""} onChange={(e) => {setFormData({...formData, property_type: e.target.value})}} className='form-control p-3 mt-2'>
+                        <option value="" disabled>---------- choisir ----------</option>
+                        <option value="House">Maison</option>
                         <option value="Appartment">Appartement</option>
-                        <option value="studio">Studio</option>
-                        <option value="villa">Villa</option>
-                        <option value="land">Terrain</option>
+                        <option value="Studio">Studio</option>
+                        <option value="Villa">Villa</option>
+                        <option value="Land">Terrain</option>
+                        <option value="Commercial">Local commercial</option>
                       </select>
                     </label>
                   </div>
                   <div className="col-md-6 p-0">
-                    <label className='pb-4 d-block px-1' htmlFor="type_annonce">
+                    <label className='pb-4 d-block px-1' htmlFor="annonce_type">
                       Type d'annonce *
-                      <select name="type_annonce" id="type_annonce" className='form-control p-3 mt-2' defaultValue={'for_rent'}>
-                        <option value="for_rent">A louer</option>
-                        <option value="to_sell">A vendre</option>
+                      <select name="annonce_type" id="annonce_type" defaultValue={""} onChange={(e) => {setFormData({...formData, annonce_type: e.target.value})}} className='form-control p-3 mt-2'>
+                        <option value="" disabled>---------- choisir ----------</option>
+                        <option value="For_rent">A louer</option>
+                        <option value="To_sell">A vendre</option>
                       </select>
                     </label>
                   </div>
                   <div className="col-12 p-0">
                     <label className='pb-4 d-block px-1' htmlFor="description">
                       Description *
-                      <textarea name="description" id="description" rows={6} className="form-control mt-2" placeholder='Décrivez votre propriété en détail...'></textarea>
+                      <textarea name="description" id="description" rows={6} onChange={(e) => {setFormData({...formData, description: e.target.value})}} className="form-control mt-2" placeholder='Décrivez votre propriété en détail...'></textarea>
                     </label>
                   </div>
                 </div>
@@ -68,13 +114,13 @@ const AddProperty = () => {
                   <div className="col-md-6 p-0">
                     <label className='pb-4 d-block px-1' htmlFor="city">
                       Ville *
-                      <input type="text" id='city' name='city' className='form-control p-3 mt-2' required placeholder='Ex: Kinshasa' />
+                      <input type="text" id='city' name='city' onChange={(e) => {setFormData({...formData, city: e.target.value})}} className='form-control p-3 mt-2' required placeholder='Ex: Kinshasa' />
                     </label>
                   </div>
                   <div className="col-md-6 p-0">
                     <label className='pb-4 d-block px-1' htmlFor="adress">
                       Adresse complète *
-                      <input type="text" id='adress' name='adress' className='form-control p-3 mt-2' required placeholder='Ex: 12A Avenu du Palmier Gombe' />
+                      <input type="text" id='adress' name='adress' onChange={(e) => {setFormData({...formData, address: e.target.value})}} className='form-control p-3 mt-2' required placeholder='Ex: 12A Avenu du Palmier Gombe' />
                     </label>
                   </div>
                 </div>
@@ -86,27 +132,27 @@ const AddProperty = () => {
                   <div className="col-md-4 p-0">
                     <label className='pb-4 d-block px-1' htmlFor="bedroom">
                       Chambres
-                      <input type="text" id='bedroom' name='bedroom' className='form-control p-3 mt-2' />
+                      <input type="text" id='bedroom' name='bedroom' onChange={(e) => {setFormData({...formData, bedrooms: e.target.value})}} className='form-control p-3 mt-2' />
                     </label>
                   </div>
                   <div className="col-md-4 p-0">
                     <label className='pb-4 d-block px-1' htmlFor="bathroom">
                       Salle de bain
-                      <input type="text" id='bathroom' name='bathroom' className='form-control p-3 mt-2' />
+                      <input type="text" id='bathroom' name='bathroom' onChange={(e) => {setFormData({...formData, bathrooms: e.target.value})}} className='form-control p-3 mt-2' />
                     </label>
                   </div>
                   <div className="col-md-4 p-0">
                     <label className='pb-4 d-block px-1' htmlFor="area">
                       Surface (m²)
-                      <input type="text" id='area' name='area' className='form-control p-3 mt-2' />
+                      <input type="text" id='area' name='area' onChange={(e) => {setFormData({...formData, area: e.target.value})}} className='form-control p-3 mt-2' />
                     </label>
                   </div>
-                  <div className="col-12 p-0">
+                  {/* <div className="col-12 p-0">
                     <label className='pb-4 d-block px-1' htmlFor="other">
                       Équipements et caractéristiques
-                      <input type="text" id='other' name='other' className='form-control p-3 mt-2' />
+                      <input type="text" id='other' name='other' onChange={(e) => {setFormData({...formData, title: e.target.value})}} className='form-control p-3 mt-2' />
                     </label>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
@@ -115,15 +161,19 @@ const AddProperty = () => {
                   <h4 style={{fontWeight: 'bolder', marginBottom: '30px'}}>Images</h4>
                   <div className="col-md-4 p-0">
                     <label className='pb-4 d-block px-1' htmlFor="images">
-                      Choisir des images
-                      <input type="file" id='images' name='images' className='form-control p-3 mt-2' />
+                      Choisir une image
+                      <input type="file" id='images' name='images' onChange={(e) => {setFormData({...formData, image: e.target.files})}} className='form-control p-3 mt-2' />
                     </label>
                   </div>
                 </div>
               </div>
 
               <div className="col-12">
-                <button type="button" className='btn btn-primary p-3'>Publier la propriété</button>
+                {
+                  loading
+                  ? <button type="button" className='btn btn-primary p-3 text-muted'>Publication en cours...</button>
+                  : <button type="button" className='btn btn-primary p-3' onClick={handleSubmit}>Publier la propriété</button>
+                }
               </div>
             </div>
         </div>

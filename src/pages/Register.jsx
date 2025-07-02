@@ -1,3 +1,4 @@
+import './Log.css';
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -13,6 +14,7 @@ const Register = () => {
     const [lastname, setLastname] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
+    const [gender, setGender] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
 
@@ -24,7 +26,7 @@ const Register = () => {
             method: "post",
             url: "http://127.0.0.1:8000/api/accounts/register/",
             withCredentials: false,
-            data: {first_name: firstname, last_name: lastname, email, phone, password}
+            data: {first_name: firstname, last_name: lastname, email, phone, gender, password}
         })
         .then((res)=>{
             
@@ -74,11 +76,19 @@ const Register = () => {
                             </label>
                             <label htmlFor="email">
                                 Email
-                                <input type="email" className="form-control" name="email" id="email" onChange={e=>setEmail(e.target.value)} required />
+                                <input type="email" className="form-control" name="email" id="email" onChange={e=>setEmail(e.target.value)} />
                             </label>
                             <label htmlFor="phone">
                                 Phone
                                 <input type="text" className="form-control" name="phone" id="phone" onChange={e=>setPhone(e.target.value)} required />
+                            </label>
+                            <label htmlFor="gender">
+                                Genre
+                                <select name="gender" id="gender" className="form-control" defaultValue={""} onChange={e=>setGender(e.target.value)} required>
+                                    <option value="" disabled>---------- choisir ----------</option>
+                                    <option value="M">M</option>
+                                    <option value="F">F</option>
+                                </select>
                             </label>
                             <label htmlFor="password">
                                 Mot de passe

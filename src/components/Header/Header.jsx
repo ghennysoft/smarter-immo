@@ -22,10 +22,10 @@ const HeaderComponent = ({children}) => {
                 <li className="nav-item"><Link to={"/properties"} className="nav-link">Propriétés</Link></li>
                 <li className="nav-item"><Link to={"/about"} className="nav-link">A propos</Link></li>
                 <li className="nav-item"><Link to={"/"} className="nav-link">Contact</Link></li>
-                {
+                {/* {
                   currentUser?.user?.is_superuser &&
                   <li className="nav-item"><Link to={"/add"} className="nav-link">Ajouter</Link></li>
-                }
+                } */}
               </ul>
             </div>
             <div className="d-flex position-relative pt-2">
