@@ -10,28 +10,32 @@ import { useSelector } from 'react-redux'
 
 const Home = () => {
 
-  const {currentUser} = useSelector(state=>state.user);
+  const {currentUser} = useSelector(state=>state?.user);
 
   const [properties, setProperties] = useState([]);
 
   useEffect(()=>{
-    const getProperties = async () => {
+    if(currentUser?.token) {
+
+      const getProperties = async () => {
       await axios({
         method: "get",
         url: "http://127.0.0.1:8000/api/properties/",
         withCredentials: true,
         headers: {
-          "Authorization": `Token ${currentUser.token}`,
+          "Authorization": `Token ${currentUser?.token}`,
         },
       })
       .then((res)=>{
         setProperties(res.data)
       })
       .catch((err)=>{
-        console.log(err)
+        // console.log(err)
       })
     }
     getProperties();
+
+    }
   }, []);
 
   return (
@@ -162,7 +166,7 @@ const Home = () => {
               {
                 properties?.length !== 0
                   ? properties?.slice(0,3)?.map((property)=>(
-                    <div className="col-md-6 col-lg-4 item mb-4">
+                    <div key={property?.id} className="col-md-6 col-lg-4 item mb-4">
                       <Link to={`/detail/${property?.id}`}>
                         <img src={property?.image ? 'http://127.0.0.1:8000'+property?.image : "/images/r1.png"} alt="img" />
                         <div className="d-flex justify-content-between pt-2">

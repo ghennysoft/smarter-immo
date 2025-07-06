@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import HeaderComponent from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
-import { Ellipsis, Headphones, LucideUsersRound, NotebookTextIcon, Smile } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
@@ -63,24 +62,22 @@ const Profile = () => {
                     <div className="d-flex gap-3 mb-3">
                       <div className='profile-picture' style={{width: '120px', height: '120px', borderRadius: '50%', background: '#ccc'}}></div>
                       <div className='d-flex flex-column mt-2'>
-                        <h2 className="title m-0"><b>{userData.first_name} {userData.last_name}</b></h2>
+                        <h2 className="title m-0"><b>{userData?.first_name} {userData?.last_name}</b></h2>
                           
-                        { userData.is_superuser && <Link to={'/add-item'}>Ajouter une maison</Link> }
-                        
                         {/* Profile Data */}
-                        <table class='mt-2'>
+                        <table className='mt-2'>
                           <tbody>
                             <tr>
                               <td>Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                              <td>: {userData.email}</td>
+                              <td>: {userData?.email}</td>
                             </tr>
                             <tr>
                               <td>Téléphone &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                              <td>: {userData.phone}</td>
+                              <td>: {userData?.phone}</td>
                             </tr>
                             <tr>
                               <td>Genre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                              <td>: {userData.gender?userData.gender:<em className='text-muted'><small>Non défini</small></em>}</td>
+                              <td>: {userData?.gender?userData?.gender:<em className='text-muted'><small>Non défini</small></em>}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -90,7 +87,7 @@ const Profile = () => {
                         <h5><b>Mon compte</b></h5>
                         <ul className="list-group">
                           <li className="list-group-item">
-                            <Link to={''} className="nav-link">Modifier le profile</Link>
+                            <Link to={'/editProfile'} className="nav-link">Modifier le profile</Link>
                           </li>
                           <li className="list-group-item">
                             <Link to={''} className="nav-link">Changer le mot de passe</Link>
@@ -99,7 +96,7 @@ const Profile = () => {
                             <Link to={'/addProperty'} className="nav-link">Ajouter une propriété</Link>
                           </li>
                           <li className="list-group-item">
-                            <Link to={'/myProperty'} className="nav-link">Mes propriétés</Link>
+                            <Link to={'/myProperties'} className="nav-link">Mes propriétés</Link>
                           </li>
                           <li className="list-group-item">
                             <Link to={''} className="nav-link">Favories</Link>

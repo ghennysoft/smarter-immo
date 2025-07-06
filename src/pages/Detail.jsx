@@ -43,7 +43,7 @@ const Detail = () => {
         <div className="container">
             <div className="row m-0">
               <div className="col-lg-9 item mb-3">
-                <img src={property?.image ? 'http://127.0.0.1:8000'+property?.image : "/images/r1.png"} alt="img" className='w-100 mb-3' />
+                <img src={property?.main_image ? 'http://127.0.0.1:8000'+property?.main_image : "/images/r1.png"} alt="img" className='w-100 mb-3' />
                 <h2 className="mt-2" style={{fontWeight: 'bolder'}}>{property?.title}</h2>
                 <div className="d-flex align-items-center mb-12">
                   <MapPinIcon width={18} className='text-primary' />  &nbsp;

@@ -11,6 +11,7 @@ import Profile from './pages/Profile';
 import { useSelector } from 'react-redux';
 import AddProperty from './pages/AddProperty';
 import MyProperties from './pages/MyProperties';
+import EditProfile from './pages/EditProfile';
 
 function App() {
   
@@ -33,11 +34,12 @@ function App() {
             <Route path='*' element={<Navigate to='/' />}></Route>
             <Route path='/' element={<Home />}></Route>
             <Route path='/profile' element={<Profile />}></Route>
+            <Route path='/editProfile' element={<EditProfile />}></Route>
             <Route path='/properties' element={<Properties />}></Route>
             <Route path='/detail/:id' element={<Detail />}></Route>
             <Route path='/about' element={<About />}></Route>
             <Route path='/addProperty' element={<AddProperty />}></Route>
-            <Route path='/myProperty' element={<MyProperties />}></Route>
+            <Route path='/myProperties' element={<MyProperties />}></Route>
           </Routes>
       }
     </>

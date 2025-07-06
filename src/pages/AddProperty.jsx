@@ -18,7 +18,8 @@ const AddProperty = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    image: null,
+    main_image: null,
+    // images: null,
     property_type: '',
     annonce_type: '',
     price: '',
@@ -32,17 +33,33 @@ const AddProperty = () => {
   
   const handleSubmit = async () => {
     setLoading(true)
+    
+    const myFormData = new FormData();
+    myFormData.append('title', formData.title);
+    myFormData.append('description', formData.description);
+    myFormData.append('city', formData.city);
+    myFormData.append('property_type', formData.property_type);
+    myFormData.append('annonce_type', formData.annonce_type);
+    myFormData.append('price', formData.price);
+    myFormData.append('area', formData.area);
+    myFormData.append('bedrooms', formData.bedrooms);
+    myFormData.append('bathrooms', formData.bathrooms);
+    myFormData.append('address', formData.address);
+    myFormData.append('main_image', formData.main_image);
+    // myFormData.append('images', formData.images);
+
     axios({
         method: "post",
         url: "http://127.0.0.1:8000/api/properties/",
         withCredentials: true,
         headers: {
+          'Content-Type': 'multipart/form-data',
           "Authorization": `Token ${currentUser.token}`,
         },
         data: formData,
     })
     .then((res)=>{
-      navigate('/');
+      navigate('/myProperties');
       setLoading(false);
     })
     .catch((err)=>{
@@ -169,9 +186,9 @@ const AddProperty = () => {
                 <div className="row m-0">
                   <h4 style={{fontWeight: 'bolder', marginBottom: '30px'}}>Images</h4>
                   <div className="col-md-4 p-0">
-                    <label className='pb-4 d-block px-1' htmlFor="images">
+                    <label className='pb-4 d-block px-1' htmlFor="main_image">
                       Choisir une image
-                      <input type="file" id='images' name='images' onChange={(e) => {setFormData({...formData, image: e.target.files[0]})}} className='form-control p-3 mt-2' required />
+                      <input type="file" id='main_image' name='main_image' onChange={(e) => {setFormData({...formData, main_image: e.target.files[0]})}} className='form-control p-3 mt-2' required />
                     </label>
                   </div>
                 </div>

@@ -30,6 +30,7 @@ const Login = () => {
           setLoading(false)
       })
       .catch((err)=>{
+        console.log(err);        
           dispatch(loginFailure())
           setLoading(false)
       })        
