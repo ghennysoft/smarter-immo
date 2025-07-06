@@ -41,7 +41,7 @@ const MyProperties = () => {
 
       <div className="properties mt-lg-5">
         <div className="container">
-          <h2 className='p-4'>Propriétés</h2>
+          <h2 className='p-4'>Mes Propriétés</h2>
           <div className="list-items">
             <div className="row m-0">
 

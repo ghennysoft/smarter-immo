@@ -19,15 +19,16 @@ const AddProperty = () => {
     title: '',
     description: '',
     main_image: null,
-    // images: null,
+    price: '',
+    city: '',
+    address: '',
     property_type: '',
     annonce_type: '',
-    price: '',
-    area: '',
+    long: '',
+    larg: '',
     bedrooms: 0,
     bathrooms: 0,
-    address: '',
-    city: '',
+    equipments: '',
   });
   console.log(formData);
   
@@ -37,16 +38,17 @@ const AddProperty = () => {
     const myFormData = new FormData();
     myFormData.append('title', formData.title);
     myFormData.append('description', formData.description);
+    myFormData.append('main_image', formData.main_image);
+    myFormData.append('price', formData.price);
     myFormData.append('city', formData.city);
+    myFormData.append('address', formData.address);
     myFormData.append('property_type', formData.property_type);
     myFormData.append('annonce_type', formData.annonce_type);
-    myFormData.append('price', formData.price);
-    myFormData.append('area', formData.area);
+    myFormData.append('long', formData.long);
+    myFormData.append('larg', formData.larg);
     myFormData.append('bedrooms', formData.bedrooms);
     myFormData.append('bathrooms', formData.bathrooms);
-    myFormData.append('address', formData.address);
-    myFormData.append('main_image', formData.main_image);
-    // myFormData.append('images', formData.images);
+    myFormData.append('equipments', formData.equipments);
 
     axios({
         method: "post",
@@ -106,12 +108,12 @@ const AddProperty = () => {
                       Type de propriété *
                       <select name="property_type" id="property_type" defaultValue={""} onChange={(e) => {setFormData({...formData, property_type: e.target.value})}} className='form-control p-3 mt-2'>
                         <option value="" disabled>---------- choisir ----------</option>
-                        <option value="House">Maison</option>
-                        <option value="Appartment">Appartement</option>
-                        <option value="Studio">Studio</option>
-                        <option value="Villa">Villa</option>
-                        <option value="Land">Terrain</option>
-                        <option value="Commercial">Local commercial</option>
+                        <option value="maison">Maison</option>
+                        <option value="appartement">Appartement</option>
+                        <option value="studio">Studio</option>
+                        <option value="villa">Villa</option>
+                        <option value="terrain">Terrain</option>
+                        <option value="commercial">Local commercial</option>
                       </select>
                     </label>
                   </div>
@@ -120,8 +122,8 @@ const AddProperty = () => {
                       Type d'annonce *
                       <select name="annonce_type" id="annonce_type" defaultValue={""} onChange={(e) => {setFormData({...formData, annonce_type: e.target.value})}} className='form-control p-3 mt-2'>
                         <option value="" disabled>---------- choisir ----------</option>
-                        <option value="For_rent">A louer</option>
-                        <option value="To_sell">A vendre</option>
+                        <option value="À louer">À louer</option>
+                        <option value="À vendre">À vendre</option>
                       </select>
                     </label>
                   </div>
@@ -155,30 +157,37 @@ const AddProperty = () => {
               <div className="col-12 mb-5">
                 <div className="row m-0">
                   <h4 style={{fontWeight: 'bolder', marginBottom: '30px'}}>Caractéristiques</h4>
-                  <div className="col-md-4 p-0">
+                  <div className="col-md-6 p-0">
+                    <label className='pb-4 d-block px-1' htmlFor="long">
+                      Longueur
+                      <input type="text" id='long' name='long' onChange={(e) => {setFormData({...formData, long: e.target.value})}} className='form-control p-3 mt-2' />
+                    </label>
+                  </div>
+                  <div className="col-md-6 p-0">
+                    <label className='pb-4 d-block px-1' htmlFor="larg">
+                      Largeur
+                      <input type="text" id='larg' name='larg' onChange={(e) => {setFormData({...formData, larg: e.target.value})}} className='form-control p-3 mt-2' />
+                    </label>
+                  </div>
+                  <div className="col-md-6 p-0">
                     <label className='pb-4 d-block px-1' htmlFor="bedroom">
                       Chambres
                       <input type="text" id='bedroom' name='bedroom' onChange={(e) => {setFormData({...formData, bedrooms: e.target.value})}} className='form-control p-3 mt-2' />
                     </label>
                   </div>
-                  <div className="col-md-4 p-0">
+                  <div className="col-md-6 p-0">
                     <label className='pb-4 d-block px-1' htmlFor="bathroom">
                       Salle de bain
                       <input type="text" id='bathroom' name='bathroom' onChange={(e) => {setFormData({...formData, bathrooms: e.target.value})}} className='form-control p-3 mt-2' />
                     </label>
                   </div>
-                  <div className="col-md-4 p-0">
-                    <label className='pb-4 d-block px-1' htmlFor="area">
-                      Surface (m²)
-                      <input type="text" id='area' name='area' onChange={(e) => {setFormData({...formData, area: e.target.value})}} className='form-control p-3 mt-2' />
+                  <div className="col-12 p-0">
+                    <label className='pb-4 d-block px-1' htmlFor="equipments">
+                      Autres caractéristiques
+                      <input type="text" id='equipments' name='equipments' onChange={(e) => {setFormData({...formData, equipments: e.target.value})}} className='form-control p-3 mt-2' />
                     </label>
+                    <small className="text-muted">Séparez-les par une virgule. Ex: Piscine, Jardin, Cuisine, Garage</small>
                   </div>
-                  {/* <div className="col-12 p-0">
-                    <label className='pb-4 d-block px-1' htmlFor="other">
-                      Équipements et caractéristiques
-                      <input type="text" id='other' name='other' onChange={(e) => {setFormData({...formData, title: e.target.value})}} className='form-control p-3 mt-2' />
-                    </label>
-                  </div> */}
                 </div>
               </div>
 

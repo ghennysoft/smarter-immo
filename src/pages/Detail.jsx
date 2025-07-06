@@ -32,7 +32,8 @@ const Detail = () => {
       }
       getProperty();
     }, [id]);
-    console.log(property);
+    console.log(property.equipments);
+    console.log(property?.equipments?.split(','));
 
   return (
     <div className='Detail'>
@@ -53,33 +54,21 @@ const Detail = () => {
                 <h5 className='mt-4'><b>Description</b></h5>
                 <p>{property?.description}</p>
                 
-                <h5 className='mt-4'><b>Equipements</b></h5>
-                <ul className='row'>
-                  <div className="col-sm-6 col-md-4 p-3">
-                    <li>Piscine privée</li>
-                  </div>
-                  <div className="col-sm-6 col-md-4 p-3">
-                    <li>Garage 2 voitures</li>
-                  </div>
-                  <div className="col-sm-6 col-md-4 p-3">
-                    <li>Terrasse 50m²</li>
-                  </div>
-                  <div className="col-sm-6 col-md-4 p-3">
-                    <li>Vue mer</li>
-                  </div>
-                  <div className="col-sm-6 col-md-4 p-3">
-                    <li>Cuisine équipée</li>
-                  </div>
-                  <div className="col-sm-6 col-md-4 p-3">
-                    <li>Climatisation</li>
-                  </div>
-                  <div className="col-sm-6 col-md-4 p-3">
-                    <li>Sécurité 24h/24</li>
-                  </div>
-                  <div className="col-sm-6 col-md-4 p-3">
-                    <li>Jardin paysager</li>
-                  </div>
-                </ul>
+                {
+                  property?.equipments && 
+                  <>
+                    <h5 className='mt-4'><b>Equipements</b></h5>
+                    <ul className='row'>
+                      {
+                        property?.equipments?.split(',').map((item, index)=>(
+                          <div key={index} className="col-sm-6 col-md-4 p-3">
+                            <li style={{textTransform: 'capitalize'}}>{item}</li>
+                          </div>
+                        ))
+                      }
+                    </ul>
+                  </>
+                }
               </div>
               <div className="col-lg-3 item mb-3">
                 <div className="py-3">
@@ -101,17 +90,6 @@ const Detail = () => {
                           <Bath width={20} height={20} className='text-primary' /> <br />
                         </div>
                         <b>
-                          <small>Garage</small> <br />
-                          <span style={{fontSize: '0.9rem'}}>1</span>
-                        </b>
-                      </div>
-                    </div>
-                    <div className="col-sm-6 mb-3">
-                      <div className="d-flex gap-2">
-                        <div className='border-primary' style={{border: '2px solid #777', padding: '10px'}}>
-                          <Bath width={20} height={20} className='text-primary' /> <br />
-                        </div>
-                        <b>
                           <small>Salle de bain</small> <br />
                           <span style={{fontSize: '0.9rem'}}>{property?.bathrooms}</span>
                         </b>
@@ -124,7 +102,7 @@ const Detail = () => {
                         </div>
                         <b>
                           <small>Taille</small> <br />
-                          <span style={{fontSize: '0.9rem'}}>{property?.area} m<sup>2</sup></span>
+                          <span style={{fontSize: '0.9rem'}}>{property?.long} x {property?.larg} m</span>
                         </b>
                       </div>
                     </div>
@@ -164,9 +142,6 @@ const Detail = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* <h5 className='themeColor1'>Maps</h5>
-                <div className="map"></div> */}
               </div>
             </div>
         </div>
