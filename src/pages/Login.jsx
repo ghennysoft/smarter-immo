@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { loginFailure, loginStart, loginSuccess } from '../redux/userSlice'
 import axios from 'axios'
-import HeaderComponent from '../Components/Header/Header'
+import HeaderComponent from '../components/Header/Header'
 
 const Login = () => {
     const navigate = useNavigate()

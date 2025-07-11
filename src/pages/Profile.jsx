@@ -87,7 +87,7 @@ const Profile = () => {
                         <h5><b>Mon compte</b></h5>
                         <ul className="list-group">
                           <li className="list-group-item">
-                            <Link to={'/editProfile'} className="nav-link">Modifier le profile</Link>
+                            <Link to={''} className="nav-link">Modifier le profile</Link>
                           </li>
                           <li className="list-group-item">
                             <Link to={''} className="nav-link">Changer le mot de passe</Link>

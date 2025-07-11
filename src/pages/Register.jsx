@@ -1,10 +1,10 @@
 import './Log.css';
 import axios from 'axios'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { loginFailure, loginStart, loginSuccess } from '../redux/userSlice';
-import HeaderComponent from '../Components/Header/Header'
+import HeaderComponent from '../components/Header/Header'
 
 const Register = () => {
     const navigate = useNavigate()

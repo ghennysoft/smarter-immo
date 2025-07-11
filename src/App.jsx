@@ -34,7 +34,7 @@ function App() {
             <Route path='*' element={<Navigate to='/' />}></Route>
             <Route path='/' element={<Home />}></Route>
             <Route path='/profile' element={<Profile />}></Route>
-            <Route path='/editProfile' element={<EditProfile />}></Route>
+            {/* <Route path='/editProfile' element={<EditProfile />}></Route> */}
             <Route path='/properties' element={<Properties />}></Route>
             <Route path='/detail/:id' element={<Detail />}></Route>
             <Route path='/about' element={<About />}></Route>
