@@ -7,6 +7,7 @@ import Footer from '../components/Footer/Footer'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
+import { apiURL } from '../utils/variables'
 
 const Home = () => {
 
@@ -20,7 +21,7 @@ const Home = () => {
       const getProperties = async () => {
       await axios({
         method: "get",
-        url: "http://127.0.0.1:8000/api/properties/",
+        url: `${apiURL}/properties/`,
         withCredentials: true,
         headers: {
           "Authorization": `Token ${currentUser?.token}`,

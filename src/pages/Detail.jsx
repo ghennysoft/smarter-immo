@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { apiURL } from '../utils/variables'
 
 const Detail = () => {
   
@@ -17,7 +18,7 @@ const Detail = () => {
       const getProperty = async () => {
         await axios({
           method: "get",
-          url: `http://127.0.0.1:8000/api/property/${id}`,
+          url: `${apiURL}/property/${id}`,
           withCredentials: true,
           headers: {
             "Authorization": `Token ${currentUser.token}`,

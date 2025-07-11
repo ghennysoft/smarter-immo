@@ -12,11 +12,13 @@ import { useSelector } from 'react-redux';
 import AddProperty from './pages/AddProperty';
 import MyProperties from './pages/MyProperties';
 import EditProfile from './pages/EditProfile';
+import { apiURL } from './utils/variables';
 
 function App() {
   
   const {currentUser} = useSelector(state=>state.user)
-
+  console.log(apiURL);
+  
   return (
     <>
       {

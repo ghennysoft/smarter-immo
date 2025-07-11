@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { loginFailure, loginStart, loginSuccess } from '../redux/userSlice';
 import HeaderComponent from '../components/Header/Header'
+import { apiURL } from '../utils/variables';
 
 const Register = () => {
     const navigate = useNavigate()
@@ -24,7 +25,7 @@ const Register = () => {
         setLoading(true)
         axios({
             method: "post",
-            url: "http://127.0.0.1:8000/api/accounts/register/",
+            url: `${apiURL}/accounts/register/`,
             withCredentials: false,
             data: {first_name: firstname, last_name: lastname, email, phone, gender, password}
         })
@@ -32,7 +33,7 @@ const Register = () => {
             
             axios({
                 method: "post",
-                url: "http://127.0.0.1:8000/api/accounts/login/",
+                url: `${apiURL}/accounts/login/`,
                 withCredentials: false,
                 data: {email, password}
             })

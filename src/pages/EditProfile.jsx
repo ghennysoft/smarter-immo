@@ -6,6 +6,7 @@ import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { loginSuccess } from '../redux/userSlice'
+import { apiURL } from '../utils/variables'
 
 const EditProfile = () => {
     const {currentUser} = useSelector(state=>state.user)
@@ -40,7 +41,7 @@ const EditProfile = () => {
 
     axios({
         method: "put",
-        url: "http://127.0.0.1:8000/api/accounts/profile-edit/",
+        url: `${apiURL}/accounts/profile-edit/`,
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data',

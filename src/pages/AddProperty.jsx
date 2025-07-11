@@ -5,6 +5,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { apiURL } from '../utils/variables'
 
 const AddProperty = () => {
 
@@ -52,7 +53,7 @@ const AddProperty = () => {
 
     axios({
         method: "post",
-        url: "http://127.0.0.1:8000/api/properties/",
+        url: `${apiURL}/properties/`,
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data',

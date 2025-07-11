@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import HeaderComponent from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { loginFailure, logout } from '../redux/userSlice'
+import { apiURL } from '../utils/variables'
 
 const Profile = () => {
     const {currentUser} = useSelector(state=>state.user)
@@ -17,7 +18,7 @@ const Profile = () => {
         e.preventDefault();
         axios({
             method: "post",
-            url: "http://127.0.0.1:8000/api/accounts/logout/",
+            url: `${apiURL}/accounts/logout/`,
             withCredentials: true,
             headers: {
               "Authorization": `Token ${currentUser.token}`,
@@ -37,7 +38,7 @@ const Profile = () => {
         const getProfileData = async () => {
             const resp = await axios({
                 method: "get",
-                url: "http://127.0.0.1:8000/api/accounts/profile/",
+                url: `${apiURL}/accounts/profile/`,
                 withCredentials: true,
                 headers: {
                   "Authorization": `Token ${currentUser.token}`,

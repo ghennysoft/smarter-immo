@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { loginFailure, loginStart, loginSuccess } from '../redux/userSlice'
 import axios from 'axios'
 import HeaderComponent from '../components/Header/Header'
+import { apiURL } from '../utils/variables';
 
 const Login = () => {
     const navigate = useNavigate()
@@ -20,7 +21,7 @@ const Login = () => {
       setLoading(true)
       axios({
           method: "post",
-          url: "http://127.0.0.1:8000/api/accounts/login/",
+          url: `${apiURL}/accounts/login/`,
           withCredentials: false,
           data: {email, password}
       })
