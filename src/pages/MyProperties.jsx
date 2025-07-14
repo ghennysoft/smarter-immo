@@ -21,19 +21,18 @@ const MyProperties = () => {
           url: `${apiURL}/myProperties/`,
           withCredentials: true,
           headers: {
-            "Authorization": `Token ${currentUser.token}`,
+            "Authorization": `Bearer ${currentUser.access}`,
           },
         })
         .then((res)=>{
           setProperties(res.data)
         })
         .catch((err)=>{
-          console.log(err)
+          // console.log(err)
         })
       }
       getProperties();
     }, []);
-    console.log(properties);
 
   return (
     <div className='Home'>

@@ -21,7 +21,7 @@ const Properties = () => {
         url: `${apiURL}/properties/`,
         withCredentials: true,
         headers: {
-          "Authorization": `Token ${currentUser.token}`,
+          "Authorization": `Bearer ${currentUser.access}`,
         },
       })
       .then((res)=>{
@@ -50,7 +50,7 @@ const Properties = () => {
                   ? properties?.map((property)=>(
                     <div key={property?.id} className="col-md-6 col-lg-4 item mb-4">
                       <Link to={`/detail/${property?.id}`}>
-                        <img src={property?.image ? 'http://127.0.0.1:8000'+property?.image : "/images/r1.png"} alt="img" height={200} />
+                        <img src={property?.main_image ? 'http://127.0.0.1:8000'+property?.main_image : "/images/r1.png"} alt="img" height={200} />
                         <div className="d-flex justify-content-between pt-2">
                           <h3 className="themeColor1">${property?.price}</h3>
                           <p className="m-0" style={{ paddingTop: '2px' }}><small className='for'>{property?.annonce_type}</small> &nbsp;</p>

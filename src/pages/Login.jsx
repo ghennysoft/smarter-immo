@@ -21,14 +21,16 @@ const Login = () => {
       setLoading(true)
       axios({
           method: "post",
-          url: `${apiURL}/accounts/login/`,
+          url: `${apiURL}/accounts/token/`,
           withCredentials: false,
           data: {email, password}
       })
       .then((res)=>{
-          dispatch(loginSuccess(res.data))
-          navigate('/')
-          setLoading(false)
+        localStorage.setItem('access', res.data.access)
+        localStorage.setItem('refresh', res.data.refresh)
+        dispatch(loginSuccess(res.data))
+        navigate('/')
+        setLoading(false)
       })
       .catch((err)=>{
         console.log(err);        

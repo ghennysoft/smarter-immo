@@ -9,31 +9,18 @@ import { apiURL } from '../utils/variables'
 
 const Profile = () => {
     const {currentUser} = useSelector(state=>state.user)
-    const userData = currentUser?.user;
   
     const navigate = useNavigate();
     const dispatch = useDispatch();
   
     const handleClick = async (e) => {
         e.preventDefault();
-        axios({
-            method: "post",
-            url: `${apiURL}/accounts/logout/`,
-            withCredentials: true,
-            headers: {
-              "Authorization": `Token ${currentUser.token}`,
-            }
-        })
-        .then((res)=>{
-            dispatch(logout())
-            navigate('/')
-        })
-        .catch((err)=>{
-            dispatch(loginFailure())
-        })        
+        localStorage.removeItem('persist:root');
+        location.reload();
+        // navigate('/');
     }
 
-    const [datas, setDatas] = useState([]) 
+    const [data, setData] = useState([]) 
     useEffect(()=>{
         const getProfileData = async () => {
             const resp = await axios({
@@ -41,14 +28,19 @@ const Profile = () => {
                 url: `${apiURL}/accounts/profile/`,
                 withCredentials: true,
                 headers: {
-                  "Authorization": `Token ${currentUser.token}`,
+                  "Authorization": `Bearer ${currentUser.access}`,
                 },
-            });
-            setDatas(resp.data)
-            return resp.data
+            })
+            .then((res)=>{
+              setData(res.data)
+            })
+            .catch((err)=>{
+              dispatch(loginFailure())
+            })   
+            
         }
         getProfileData();
-    }, [currentUser.token])
+    }, [currentUser.access])
     
   return (
     <div className='About'>
@@ -63,22 +55,22 @@ const Profile = () => {
                     <div className="d-flex gap-3 mb-3">
                       <div className='profile-picture' style={{width: '120px', height: '120px', borderRadius: '50%', background: '#ccc'}}></div>
                       <div className='d-flex flex-column mt-2'>
-                        <h2 className="title m-0"><b>{userData?.first_name} {userData?.last_name}</b></h2>
+                        <h2 className="title m-0"><b>{data?.first_name} {data?.last_name}</b></h2>
                           
                         {/* Profile Data */}
                         <table className='mt-2'>
                           <tbody>
                             <tr>
                               <td>Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                              <td>: {userData?.email}</td>
+                              <td>: {data?.email}</td>
                             </tr>
                             <tr>
                               <td>Téléphone &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                              <td>: {userData?.phone}</td>
+                              <td>: {data?.phone}</td>
                             </tr>
                             <tr>
                               <td>Genre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                              <td>: {userData?.gender?userData?.gender:<em className='text-muted'><small>Non défini</small></em>}</td>
+                              <td>: {data?.gender?data?.gender:<em className='text-muted'><small>Non défini</small></em>}</td>
                             </tr>
                           </tbody>
                         </table>

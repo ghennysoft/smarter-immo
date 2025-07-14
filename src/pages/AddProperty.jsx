@@ -16,6 +16,9 @@ const AddProperty = () => {
   const [error, setError] = useState('');
 
   const [loading, setLoading] = useState(false);
+  const [images, setImages] = useState([]);
+  console.log(images);
+  
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -32,6 +35,7 @@ const AddProperty = () => {
     equipments: '',
   });
   console.log(formData);
+  formData?.images?.forEach(i=>console.log(i))
   
   const handleSubmit = async () => {
     setLoading(true)
@@ -51,26 +55,36 @@ const AddProperty = () => {
     myFormData.append('bathrooms', formData.bathrooms);
     myFormData.append('equipments', formData.equipments);
 
+    if(images?.length !== 0){
+      images?.forEach((file)=>{
+        myFormData.append('images', file);
+      })
+    };
+    
+
+
     axios({
-        method: "post",
-        url: `${apiURL}/properties/`,
-        withCredentials: true,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          "Authorization": `Token ${currentUser.token}`,
-        },
-        data: formData,
+      method: "post",
+      url: `${apiURL}/properties/`,
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${currentUser.access}`,
+      },
+      data: myFormData,
     })
     .then((res)=>{
       navigate('/myProperties');
       setLoading(false);
+      console.log(res.data);
     })
     .catch((err)=>{
       console.log(err);
-      
       setLoading(false);
       setError("Erreur de publication, vérifiez que tous les champs sont bien remplis")
     })
+    
   }
 
   return (
@@ -197,19 +211,27 @@ const AddProperty = () => {
                   <h4 style={{fontWeight: 'bolder', marginBottom: '30px'}}>Images</h4>
                   <div className="col-md-4 p-0">
                     <label className='pb-4 d-block px-1' htmlFor="main_image">
-                      Choisir une image
+                      Image principale
                       <input type="file" id='main_image' name='main_image' onChange={(e) => {setFormData({...formData, main_image: e.target.files[0]})}} className='form-control p-3 mt-2' required />
+                    </label>
+                  </div>
+                  &nbsp;&nbsp;&nbsp;
+                  <div className="col-md-4 p-0">
+                    <label className='pb-4 d-block px-1' htmlFor="images"> 
+                      Autres images
+                      <input type="file" multiple id='images' name='images' onChange={(e) => {setImages([...e.target.files])}} className='form-control p-3 mt-2' required />
                     </label>
                   </div>
                 </div>
               </div>
 
               <div className="col-12">
-                {
+                <button type="button" className='btn btn-primary p-3' onClick={handleSubmit}>Publier la propriété</button>
+                {/* {
                   loading
                   ? <button type="button" className='btn btn-primary p-3 text-muted'>Publication en cours...</button>
                   : <button type="button" className='btn btn-primary p-3' onClick={handleSubmit}>Publier la propriété</button>
-                }
+                } */}
               </div>
             </div>
         </div>
