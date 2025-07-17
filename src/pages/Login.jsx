@@ -21,7 +21,7 @@ const Login = () => {
       setLoading(true)
       axios({
           method: "post",
-          url: `${apiURL}/accounts/token/`,
+          url: `${apiURL}/api/accounts/token/`,
           withCredentials: false,
           data: {email, password}
       })
@@ -33,9 +33,9 @@ const Login = () => {
         setLoading(false)
       })
       .catch((err)=>{
-        console.log(err);        
-          dispatch(loginFailure())
-          setLoading(false)
+        // console.log(err);        
+        dispatch(loginFailure())
+        setLoading(false)
       })        
     }
 
@@ -65,7 +65,7 @@ const Login = () => {
                         </p>
                         {
                             loading
-                            ? <button className='my-2' type="button" disabled>Chargement...</button>
+                            ? <button className='my-2' type="button" style={{backgroundColor: "#aaa", border: "1px solid #aaa", color: "#fff"}} disabled>Chargement...</button>
                             : <button className='my-2' type="submit">Se connecter</button>
                         }
                         <br />

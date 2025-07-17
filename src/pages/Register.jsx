@@ -25,7 +25,7 @@ const Register = () => {
         setLoading(true)
         axios({
             method: "post",
-            url: `${apiURL}/accounts/register/`,
+            url: `${apiURL}/api/accounts/register/`,
             withCredentials: false,
             data: {first_name: firstname, last_name: lastname, email, phone, gender, password}
         })
@@ -33,7 +33,7 @@ const Register = () => {
             
             axios({
                 method: "post",
-                url: `${apiURL}/accounts/login/`,
+                url: `${apiURL}/api/accounts/token/`,
                 withCredentials: false,
                 data: {email, password}
             })
@@ -97,7 +97,7 @@ const Register = () => {
                             </label>
                             {
                                 loading
-                                ? <button className='my-2' type="button" disabled>Chargement...</button>
+                                ? <button className='my-2' type="button" style={{backgroundColor: "#aaa", border: "1px solid #aaa", color: "#fff"}} disabled>Chargement...</button>
                                 : <button className='my-2' type="submit">S'enregistrer</button>
                             }
                             <br />

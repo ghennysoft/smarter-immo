@@ -18,10 +18,10 @@ const Detail = () => {
       const getProperty = async () => {
         await axios({
           method: "get",
-          url: `${apiURL}/property/${id}`,
+          url: `${apiURL}/api/property/${id}`,
           withCredentials: true,
           headers: {
-            "Authorization": `Token ${currentUser.token}`,
+            "Authorization": `Token ${currentUser?.access}`,
           },
         })
         .then((res)=>{
@@ -33,8 +33,8 @@ const Detail = () => {
       }
       getProperty();
     }, [id]);
-    console.log(property.equipments);
-    console.log(property?.equipments?.split(','));
+    // console.log(property.equipments);
+    // console.log(property?.equipments?.split(','));
 
   return (
     <div className='Detail'>
@@ -45,7 +45,7 @@ const Detail = () => {
         <div className="container">
             <div className="row m-0">
               <div className="col-lg-9 item mb-3">
-                <img src={property?.main_image ? 'http://127.0.0.1:8000'+property?.main_image : "/images/r1.png"} alt="img" className='w-100 mb-3' />
+                <img src={property?.main_image ? apiURL+property?.main_image : "/images/r1.png"} alt="img" className='w-100 mb-3' />
                 <h2 className="mt-2" style={{fontWeight: 'bolder'}}>{property?.title}</h2>
                 <div className="d-flex align-items-center mb-12">
                   <MapPinIcon width={18} className='text-primary' />  &nbsp;

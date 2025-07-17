@@ -65,7 +65,7 @@ const AddProperty = () => {
 
     axios({
       method: "post",
-      url: `${apiURL}/properties/`,
+      url: `${apiURL}/api/properties/`,
       withCredentials: true,
       headers: {
         'Content-Type': 'multipart/form-data',

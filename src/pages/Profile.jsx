@@ -20,12 +20,13 @@ const Profile = () => {
         // navigate('/');
     }
 
-    const [data, setData] = useState([]) 
+    const [data, setData] = useState([])
+    console.log(data);
     useEffect(()=>{
         const getProfileData = async () => {
             const resp = await axios({
                 method: "get",
-                url: `${apiURL}/accounts/profile/`,
+                url: `${apiURL}/api/accounts/profile/`,
                 withCredentials: true,
                 headers: {
                   "Authorization": `Bearer ${currentUser.access}`,

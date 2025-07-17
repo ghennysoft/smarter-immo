@@ -41,7 +41,7 @@ const EditProfile = () => {
 
     axios({
         method: "put",
-        url: `${apiURL}/accounts/profile-edit/`,
+        url: `${apiURL}/api/accounts/profile-edit/`,
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data',

@@ -18,7 +18,7 @@ const MyProperties = () => {
       const getProperties = async () => {
         await axios({
           method: "get",
-          url: `${apiURL}/myProperties/`,
+          url: `${apiURL}/api/myProperties/`,
           withCredentials: true,
           headers: {
             "Authorization": `Bearer ${currentUser.access}`,
