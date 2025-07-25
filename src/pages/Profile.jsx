@@ -1,47 +1,16 @@
-import { useEffect, useState } from 'react'
 import HeaderComponent from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
-import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import axios from 'axios'
-import { loginFailure, logout } from '../redux/userSlice'
-import { apiURL } from '../utils/variables'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 const Profile = () => {
-    const {currentUser} = useSelector(state=>state.user)
-  
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const { signOut, user: data } = useAuth();
   
     const handleClick = async (e) => {
         e.preventDefault();
-        localStorage.removeItem('persist:root');
-        location.reload();
+        signOut();
         // navigate('/');
     }
-
-    const [data, setData] = useState([])
-    console.log(data);
-    useEffect(()=>{
-        const getProfileData = async () => {
-            const resp = await axios({
-                method: "get",
-                url: `${apiURL}/api/accounts/profile/`,
-                withCredentials: true,
-                headers: {
-                  "Authorization": `Bearer ${currentUser.access}`,
-                },
-            })
-            .then((res)=>{
-              setData(res.data)
-            })
-            .catch((err)=>{
-              dispatch(loginFailure())
-            })   
-            
-        }
-        getProfileData();
-    }, [currentUser.access])
     
   return (
     <div className='About'>

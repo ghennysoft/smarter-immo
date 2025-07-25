@@ -19,22 +19,16 @@ const Detail = () => {
         await axios({
           method: "get",
           url: `${apiURL}/api/property/${id}`,
-          withCredentials: true,
-          headers: {
-            "Authorization": `Token ${currentUser?.access}`,
-          },
         })
         .then((res)=>{
           setProperty(res.data)
         })
         .catch((err)=>{
-          console.log(err)
+          // console.log(err)
         })
       }
       getProperty();
     }, [id]);
-    // console.log(property.equipments);
-    // console.log(property?.equipments?.split(','));
 
   return (
     <div className='Detail'>

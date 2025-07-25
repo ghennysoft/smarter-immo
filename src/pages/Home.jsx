@@ -16,27 +16,19 @@ const Home = () => {
   const [properties, setProperties] = useState([]);
 
   useEffect(()=>{
-    if(currentUser?.access) {
-
       const getProperties = async () => {
-      await axios({
-        method: "get",
-        url: `${apiURL}/api/properties/`,
-        withCredentials: true,
-        headers: {
-          "Authorization": `Bearer ${currentUser?.access}`,
-        },
-      })
-      .then((res)=>{
-        setProperties(res.data)
-      })
-      .catch((err)=>{
-        // console.log(err)
-      })
-    }
-    getProperties();
-
-    }
+        await axios({
+          method: "get",
+          url: `${apiURL}/api/property-list/`,
+        })
+        .then((res)=>{
+          setProperties(res.data)
+        })
+        .catch((err)=>{
+          // console.log(err)
+        })
+      }
+      getProperties();
   }, []);
 
   return (
@@ -169,7 +161,7 @@ const Home = () => {
                   ? properties?.slice(0,3)?.map((property)=>(
                     <div key={property?.id} className="col-md-6 col-lg-4 item mb-4">
                       <Link to={`/detail/${property?.id}`}>
-                        <img src={property?.main_image ? apiURL+property?.main_image : "/images/r1.png"} alt="img" />
+                        <img src={property?.main_image ? property?.main_image : "/images/r1.png"} alt="img" />
                         <div className="d-flex justify-content-between pt-2">
                           <h3 className="themeColor1">${property?.price}</h3>
                           <p className="m-0" style={{ paddingTop: '2px' }}><small className='for'>{property?.annonce_type}</small> &nbsp;</p>

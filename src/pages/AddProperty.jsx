@@ -2,10 +2,9 @@ import './Detail.css'
 import HeaderComponent from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import { useState } from 'react'
-import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { apiURL } from '../utils/variables'
+import api from '../api/axios'
 
 const AddProperty = () => {
 
@@ -60,19 +59,11 @@ const AddProperty = () => {
         myFormData.append('images', file);
       })
     };
-    
 
-
-    axios({
-      method: "post",
-      url: `${apiURL}/api/properties/`,
-      withCredentials: true,
+    await api.post('properties/', myFormData, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${currentUser.access}`,
       },
-      data: myFormData,
     })
     .then((res)=>{
       navigate('/myProperties');
@@ -226,12 +217,11 @@ const AddProperty = () => {
               </div>
 
               <div className="col-12">
-                <button type="button" className='btn btn-primary p-3' onClick={handleSubmit}>Publier la propriété</button>
-                {/* {
+                 {
                   loading
                   ? <button type="button" className='btn btn-primary p-3 text-muted'>Publication en cours...</button>
                   : <button type="button" className='btn btn-primary p-3' onClick={handleSubmit}>Publier la propriété</button>
-                } */}
+                }
               </div>
             </div>
         </div>

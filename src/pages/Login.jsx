@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './Log.css';
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { loginFailure, loginStart, loginSuccess } from '../redux/userSlice'
-import axios from 'axios'
 import HeaderComponent from '../components/Header/Header'
-import { apiURL } from '../utils/variables';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
+        const { signIn } = useAuth();
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -19,24 +19,16 @@ const Login = () => {
       e.preventDefault();
       dispatch(loginStart())
       setLoading(true)
-      axios({
-          method: "post",
-          url: `${apiURL}/api/accounts/token/`,
-          withCredentials: false,
-          data: {email, password}
-      })
-      .then((res)=>{
-        localStorage.setItem('access', res.data.access)
-        localStorage.setItem('refresh', res.data.refresh)
-        dispatch(loginSuccess(res.data))
-        navigate('/')
+      try {
+        const resp = await signIn({email, password})
+        dispatch(loginSuccess(resp))
         setLoading(false)
-      })
-      .catch((err)=>{
-        // console.log(err);        
+        navigate('/')
+      } catch (error) {
         dispatch(loginFailure())
         setLoading(false)
-      })        
+      }
+        
     }
 
   return (

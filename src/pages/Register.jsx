@@ -6,10 +6,12 @@ import { useDispatch } from 'react-redux';
 import { loginFailure, loginStart, loginSuccess } from '../redux/userSlice';
 import HeaderComponent from '../components/Header/Header'
 import { apiURL } from '../utils/variables';
+import { useAuth } from '../context/AuthContext';
 
 const Register = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
+    const { signUp, signIn } = useAuth();
     
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
@@ -23,31 +25,17 @@ const Register = () => {
         e.preventDefault();
         dispatch(loginStart())
         setLoading(true)
-        axios({
-            method: "post",
-            url: `${apiURL}/api/accounts/register/`,
-            withCredentials: false,
-            data: {first_name: firstname, last_name: lastname, email, phone, gender, password}
-        })
-        .then((res)=>{
-            
-            axios({
-                method: "post",
-                url: `${apiURL}/api/accounts/token/`,
-                withCredentials: false,
-                data: {email, password}
-            })
-            .then((resp)=>{
-                dispatch(loginSuccess(resp.data))
-                navigate('/')
+        await signUp({first_name: firstname, last_name: lastname, email, phone, gender, password})
+        .then(async (res)=>{
+            try {
+                const resp = await signIn({email, password})
+                dispatch(loginSuccess(resp))
                 setLoading(false)
-            })
-            .catch((e)=>{
+                navigate('/')
+            } catch (error) {
                 dispatch(loginFailure())
                 setLoading(false)
-            }) 
-
-            setLoading(false)
+            }
         })
         .catch((err)=>{
             setLoading(false)
